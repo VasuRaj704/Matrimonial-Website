@@ -27,7 +27,7 @@ const Search = () => {
     const PostData = async (event) => {
         console.log("search oanks");
         event.preventDefault();
-        const { gtage, ltage, gender, religion, marital_status } = query;
+        const { gtage, ltage, gender, religion } = query;
         if (gtage < 18) {
             toast.error("Minimum age should be 18.", { position: toast.POSITION.TOP_CENTER });
         }
@@ -40,7 +40,7 @@ const Search = () => {
                 },
                 credentials: "include",
                 body: JSON.stringify({
-                    gtage, ltage, gender, religion, marital_status
+                    gtage, ltage, gender, religion
                 })
             });
             const data = await res.json();
@@ -119,26 +119,7 @@ const Search = () => {
 
                         </div>
                     </div>
-                    <div className="row">
-                        <div className="col-md-3">
-                            <h5>Marital Status:&emsp;</h5>
-                        </div>
-                        <div className="col-md-3">
-
-
-                            <select name="marital_status" id="marital_status" className="form-select" placeholder="Status" onChange={details_input}
-                                value={query.marital_status} required >
-                                <option value="UnMarried" selected="true">Un-Married</option>
-                                <option value="Married">Married</option>
-                                <option value="Awaiting Divorce">Awaiting Divorce</option>
-                                <option value="Divorced">Divorced</option>
-                                <option value="Widowed">Widowed</option>
-                                <option value="Annulled">Annulled</option>
-                            </select>
-
-
-                        </div>
-                    </div>
+                    
 
                     <br />
                     <center>

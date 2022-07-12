@@ -10,6 +10,8 @@ import Userprofile from './components/Userprofile';
 import Editprofile from './components/Editprofile';
 import ViewProfile from "./components/ViewProfile";
 import { initialState, reducer } from "./reducer/UseReducer";
+import Admin from "./components/Admin";
+
 export const UserContext = createContext();
 
 const Routing = () => {
@@ -25,9 +27,11 @@ const Routing = () => {
             <Route exact path="/viewprofile/:id" component={ViewProfile} />
             <Route exact path="/editprofile" component={Editprofile} />
             <Route exact path="/logout" component={Logout} />
-
+            <Route path='/admin' component={Admin} />
         </Switch>
     )
+
+    // navigate react-router-dom ,, Link component
 }
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);

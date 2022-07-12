@@ -109,20 +109,20 @@ router.post('/filter', async (req, res) => {
     const ltage = req.body.ltage;
     const gender = req.body.gender;
     const religion = req.body.religion;
-    const marital_status = req.body.marital_status;
     console.log(gtage + ltage + gender + religion);
 
     let fltparam;
-
-    if (gtage && ltage && gender && religion && marital_status) {
-        fltparam = { $and: [{ age: { $gte: gtage } }, { age: { $lte: ltage } }, { gender }, { religion },{marital_status}] }
+    console.log("filter", req.body)
+    if (gtage && ltage && gender && religion ) {
+        fltparam = { $and: [{ age: { $gte: gtage } }, { age: { $lte: ltage } }, { gender }, { religion }] }
     }
-    else if (gtage && gender && religion && !ltage && marital_status) {
-        fltparam = { $and: [{ age: { $gte: gtage } }, { gender }, { religion },{marital_status}] }
-    }
-    else if (gtage && gender && religion && !ltage && !marital_status) {
+    else if (gtage && gender && religion && !ltage ) {
         fltparam = { $and: [{ age: { $gte: gtage } }, { gender }, { religion }] }
     }
+    else if (gtage && gender && religion && !ltage ) {
+        fltparam = { $and: [{ age: { $gte: gtage } }, { gender }, { religion }] }
+    }
+    console.log(fltparam)
     try {
 
         const user = await User.find(fltparam);
@@ -213,5 +213,12 @@ router.post('/delete', authenticate, async (req, res) => {
         console.log(err);
     }
 });
+
+router.get('/admin', async (req, res) => {
+    const users = await User.find();
+    console.log(users);
+    res.status(200).json({ message: "admin page.", users:users});
+});
+
 
 module.exports = router;
